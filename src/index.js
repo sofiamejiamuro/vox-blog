@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import './firebase';
+import 'bootswatch/dist/journal/bootstrap.min.css';
+// Componentes
 import { VoxBlogApp } from './VoxBlogApp';
 
 ReactDOM.render(

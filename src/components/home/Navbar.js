@@ -11,19 +11,18 @@ export const Navbar = () => {
     >
       Home
     </Link>
-      <div className="navbar-collapse">
-        <div className="navbar-nav">
-          <NavLink 
-            activeClassName="active"
-            className="nav-item nav-link" 
-            exact
-            to="/login"
-          >
-            Login
-          </NavLink>
-         
-        </div>
+    <div className="navbar-collapse">
+      <div className="navbar-nav">
+        <NavLink 
+          activeClassName="active"
+          className="nav-item nav-link" 
+          exact
+          to="/login"
+        >
+          Login
+        </NavLink>
       </div>
+    </div>
     </nav>
   );
 };
