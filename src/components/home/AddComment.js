@@ -11,11 +11,11 @@ export const AddComment = ({addEditComment}) => {
 
   // al ejecutar l afuncion useState con x parametros nos regresa un array del que obtenemos dos valores
   const [values, setValues] = useState(initialValues);
-
+ 
   const handleInputChange = (e) => {
     // console.log(e.target.value);
     const { name, value } = e.target;
-    // console.log(e.target);
+    // console.log(typeof name);
     // values es un objeto
     setValues({...values, [name]:value})
   };
@@ -29,6 +29,7 @@ export const AddComment = ({addEditComment}) => {
   };
 
   return (
+    <div className="col-md-6">
     <form className="card card-body" onSubmit={handleSubmit}>
       <div className="form-group input-group">
         <div className="input-group-text bg-ligth">
@@ -72,5 +73,6 @@ export const AddComment = ({addEditComment}) => {
         Save
       </button>
     </form>
+    </div>
   );
 };
