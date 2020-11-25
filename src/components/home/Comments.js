@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Comments = ({ links, deleteComment }) => {
-  console.log(links);
+  // console.log(links);
   return (
     <div className="col-md-6">
       {

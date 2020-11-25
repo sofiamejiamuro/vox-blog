@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppRouter } from './Routers/AppRouter';
 
-import './firebase';
+import './firebase-config';
 export const VoxBlogApp = () => {
 
   return (
