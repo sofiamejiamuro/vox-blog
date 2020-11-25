@@ -64,7 +64,7 @@ export const AddComment = ({addEditComment}) => {
           name="description"
           className="form-control"
           rows="3"
-          placeholder="Escribe de qué trata tu recomendación"
+          placeholder="Escribe sobre tu recomendación. jeje no se puede, está bloqueda la escritura en la db 😅"
           onChange={handleInputChange}
           value={ values.description }
         />
