@@ -10,22 +10,6 @@ import { db } from '../../firebase-config';
 
 export const HomeScreen = () => {
 
-  /* 
-    var employee = {    // Object we want to destructure
-      firstname: 'Jon',
-      lastname: 'Snow',
-      dateofbirth: '1990'
-    };
-    Destructuring the object into our variables
-    var { firstname, lastname, dateofbirth } = employee;
-  */
-
-  /* 
-    const foo = ['one', 'two', 'three'];
-    const [red, yellow, green] = foo;
-    Array destructuring that is the values come from an array 
-  */
-
   const [links, setLinks] = useState([]);
 
   const addEditComment = async (linkObject) => {
@@ -41,19 +25,23 @@ export const HomeScreen = () => {
     console.log( 'borrado ',id)
   };
 
-  const getLinks = async () => {
+  const getLinks =  () => {
     // querySnapshot es la respuesta que nos da firebase
     // onSnapshot es un escuchador de un cambio en la base de datos, es un metodo de firebase
     db.collection('comments').onSnapshot((querySnapshot) => {
+      // console.log(querySnapshot);
       const docs = []
       querySnapshot.forEach((doc) => {
         // console.log(doc.data());
         // obtener el doc.id que es el que se genera en fb y que necesita añadirse al objeto data que nos regresa la db
         docs.push({...doc.data(),id:doc.id})
-        // console.log(docs);
-        setLinks(docs)
+        //console.log('doc',doc);
+        //console.log(docs);
+        if(docs.length === querySnapshot.size) return setLinks(docs)
         // console.log(links);
       });
+
+      // console.log('2',querySnapshot);
     });
   };
 
