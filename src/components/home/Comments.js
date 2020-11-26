@@ -5,7 +5,7 @@ export const Comments = ({ links, deleteComment }) => {
   return (
     <div className="col-md-6">
       {
-        links.length > 2 && links.map(link => (
+        links.map(link => (
           <div className="card mt-2" key={ link.id } >
             <div className="card-body" >
               <div className="d-flex justify-content-between">
