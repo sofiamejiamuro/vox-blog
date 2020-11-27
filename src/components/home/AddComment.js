@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../../firebase-config';
+import { toast } from 'react-toastify';
 
-export const AddComment = ({addEditComment}) => {
-
+export const AddComment = ({addEditComment, currentId, links }) => {
+  
   const initialValues={
     url:'',
     author:'',
@@ -19,18 +21,55 @@ export const AddComment = ({addEditComment}) => {
     // values es un objeto
     setValues({...values, [name]:value})
   };
- 
+  
+  const validURL = (str) => {
+    var pattern = new RegExp(
+      "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+        "(\\#[-a-z\\d_]*)?$",
+      "i"
+    ); // fragment locator
+    return !!pattern.test(str);
+  };
+
   const handleSubmit = e => {
     // Cancela comportamiento por defecto
     e.preventDefault()
     // console.log(values);
+
+    if(!validURL(values.url)){
+      return toast.error('url inválida 👽',{
+        hideProgressBar: false,
+      });
+    }
     addEditComment(values);
     setValues({...initialValues})
   };
   
+  const getLinkById = async id => {
+    const doc = await db.collection('comments').doc(id).get();
+    // console.log(doc.data());
+    setValues({...doc.data()}) 
+  }
+
+  useEffect(() => {
+    // si el current id esta vacio quiere decir que no se esta editando
+    // console.log(currentId);
+    if(currentId === ''){
+      setValues({... initialValues})
+    } else {
+      // console.log(currentId);
+      getLinkById(currentId);
+    }
+  }, [currentId])
+  // Solo se va a ejecutar el useEffect cuando al darle click al edit nos mande el currentID
+
   return (
     <div className="col-md-6">
-      <form className="card card-body" onSubmit={handleSubmit}>
+      <form className="card card-body" onSubmit={ handleSubmit }>
         <div className="form-group input-group">
           <div className="input-group-text bg-ligth">
             <i className="material-icons">sentiment_satisfied</i>
@@ -56,8 +95,8 @@ export const AddComment = ({addEditComment}) => {
             id="" 
             placeholder="Nombre de la fuente"
             onChange={ handleInputChange }
-            value={ values.name }
-          />
+            value={ values.author }
+          /> 
         </div>
         <div className="form-group">
           <textarea
@@ -70,7 +109,7 @@ export const AddComment = ({addEditComment}) => {
           />
         </div>
         <button className="btn btn-primary">
-          Save
+          {currentId === ''?'Guardar':'Actualizar'}
         </button>
       </form>
     </div>
