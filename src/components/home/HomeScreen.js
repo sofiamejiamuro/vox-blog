@@ -9,6 +9,9 @@ import { toast } from 'react-toastify';
 // DataBase
 import { db } from '../../firebase-config';
 
+// Authentication
+import { auth } from '../../firebase-config';
+
 export const HomeScreen = () => {
 
   const [links, setLinks] = useState([]);
@@ -37,7 +40,7 @@ export const HomeScreen = () => {
         hideProgressBar: false,
       });
     }
-    
+  
    
   };
 
@@ -85,7 +88,14 @@ export const HomeScreen = () => {
         <div className="row">
           <AddComment { ...{addEditComment, currentId, links } }/>
           <Comments links={ links } deleteComment={ deleteComment } setCurrentId={ setCurrentId }/>
+          
         </div>
+        <button 
+            className="btn btn-primary"
+            onClick={()=> auth.auth().signOut()}
+          > 
+            Sign Out
+          </button>
       </div>
     </>
   );

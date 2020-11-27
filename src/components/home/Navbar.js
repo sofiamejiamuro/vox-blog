@@ -12,7 +12,7 @@ export const Navbar = () => {
       Home
     </Link>
     <div className="navbar-collapse">
-      <div className="navbar-nav">
+      {/* <div className="navbar-nav">
         <NavLink 
           activeClassName="active"
           className="nav-item nav-link" 
@@ -21,7 +21,15 @@ export const Navbar = () => {
         >
           Login
         </NavLink>
-      </div>
+        <NavLink 
+          activeClassName="active"
+          className="nav-item nav-link" 
+          exact
+          to="/signup"
+        >
+          SignUp
+        </NavLink> 
+      </div>*/}
     </div>
     </nav>
   );
